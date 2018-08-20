@@ -64,6 +64,27 @@ pub fn find_byte_xor_key(input: &[u8]) -> (u8, f64) {
     (highscore_ind, highscore)
 }
 
+//Given a set of bytes, repeat xors those with a set of bytes as a repeating key
+pub fn repeat_xor(input: &[u8], key: &[u8]) -> Vec<u8> {
+
+    let mut result: Vec<u8> = Vec::new();
+
+    let mut curr = 0;
+
+    for x in input.iter() {
+
+        result.push(x ^ key[curr]);
+
+        curr += 1;
+
+        if curr == key.len() {
+            curr = 0;
+        }
+    }
+
+    result
+}
+
 //Given input from Cryptopals challenge
 #[test]
 fn test_fixed_xor() {
