@@ -1,6 +1,7 @@
 use std::str;
 
 //TODO ensure same lengths
+///XORs two vectors of bytes of the same length against eachother
 pub fn fixed_xor(a: &[u8], b: &[u8]) -> Vec<u8> {
 
     let mut result: Vec<u8> = Vec::new();
@@ -13,6 +14,7 @@ pub fn fixed_xor(a: &[u8], b: &[u8]) -> Vec<u8> {
     result
 }
 
+///XORs a vector of bytes all against a single character and returns the result
 pub fn byte_xor(a: &[u8], b: u8) -> Vec<u8> {
 
     let mut result: Vec<u8> = Vec::new();
@@ -25,9 +27,10 @@ pub fn byte_xor(a: &[u8], b: u8) -> Vec<u8> {
     result
 }
 
-//given a set of bytes XORed with a single unknown character, return the most likely character
-//discerns based on highest percentage of alphabetic characters
-pub fn find_byte_xor_key(input: &[u8]) -> u8 {
+///given a set of bytes XORed with a single unknown character, return the most likely character
+///also returns the score of said character, discerned based on highest percentage of alphabetic
+///characters or spaces
+pub fn find_byte_xor_key(input: &[u8]) -> (u8, f64) {
 
     let mut highscore: f64 = 0f64;
     let mut highscore_ind: u8 = 0u8;
@@ -42,7 +45,7 @@ pub fn find_byte_xor_key(input: &[u8]) -> u8 {
 
             for y in decoded.chars() {
 
-                if y.is_alphabetic() {
+                if y.is_alphabetic() || y == ' ' {
 
                     char_count += 1;
                 }
@@ -58,7 +61,7 @@ pub fn find_byte_xor_key(input: &[u8]) -> u8 {
         }
     }
 
-    highscore_ind
+    (highscore_ind, highscore)
 }
 
 //Given input from Cryptopals challenge

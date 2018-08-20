@@ -18,7 +18,7 @@ fn main() {
     //Have vector of bytes
     let input1 = hex_string_to_bytes(&args[1]);
 
-    let key = find_byte_xor_key(&input1);
+    let key = find_byte_xor_key(&input1).0;
 
     println!("PHRASE: {}", str::from_utf8(&byte_xor(&input1[..], key)).unwrap());
     println!("KEY: {}", key as char);
