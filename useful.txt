@@ -1,0 +1,10 @@
+USEFUL INFO
+
+1 byte/u8 is 8 bits.
+1 B64 digit is 6 bits.
+1 Hex digit is 4 bits.
+
+24 bits = 3 bytes = 4 B64s = 6 Hexs
+
+Input and output are strings, so we need to be able to convert to/from those.
+A string of hex values is very different from a multi-digit hex number.

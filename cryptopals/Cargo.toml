@@ -1,0 +1,18 @@
+[package]
+name = "cryptopals"
+version = "0.1.0"
+authors = ["Josh Thompson <jthomp43@uoguelph.ca>"]
+
+[[bin]]
+name = "ch1"
+path = "src/set1/ch1/main.rs"
+
+[[bin]]
+name = "ch2"
+path = "src/set1/ch2/main.rs"
+
+[[bin]]
+name = "ch3"
+path = "src/set1/ch3/main.rs"
+
+[dependencies]
