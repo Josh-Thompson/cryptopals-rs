@@ -88,6 +88,9 @@ pub fn repeat_xor(input: &[u8], key: &[u8]) -> Vec<u8> {
 //Given input from Cryptopals challenge
 #[test]
 fn test_fixed_xor() {
+
+    use conversion::hex_string_to_bytes;
+
     assert_eq!(
         fixed_xor(
             &hex_string_to_bytes("1c0111001f010100061a024b53535009181c")[..],
