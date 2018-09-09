@@ -23,4 +23,8 @@ path = "src/set1/ch4/main.rs"
 name = "ch5"
 path = "src/set1/ch5/main.rs"
 
+[[bin]]
+name = "ch6"
+path = "src/set1/ch6/main.rs"
+
 [dependencies]

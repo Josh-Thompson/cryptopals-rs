@@ -2,25 +2,20 @@
 //  Josh Thompson, 2018
 //
 
-use std::fs::File;
-use std::io::prelude::*;
 use std::str;
 
 extern crate cryptopals;
 
 use cryptopals::xor::{byte_xor, find_byte_xor_key};
 use cryptopals::conversion::hex_string_to_bytes;
+use cryptopals::filereading::read_file;
 
 fn main() {
 
     println!("Cryptopals Set 1 Challenge 4 - Detect single character XOR");
 
     //file setup
-    let mut f = File::open("data/4.txt").expect("File not found");
-
-    let mut file_contents = String::new();
-
-    f.read_to_string(&mut file_contents).expect("Something went wrong reading the file");
+    let file_contents = read_file("data/4.txt");
 
     //variables for looping
     let mut highscore: f64 = 0f64;
