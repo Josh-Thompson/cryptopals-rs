@@ -124,11 +124,6 @@ pub fn bytes_to_base64_string(bytes: &[u8]) -> String {
         let b64_3 = ((b2 << 2) & 63u8) + ((b3 >> 6) & 63u8);
         let b64_4 = b3 & 63u8;
 
-        // println!("{}", b64_1);
-        // println!("{}", b64_2);
-        // println!("{}", b64_3);
-        // println!("{}", b64_4);
-
         string.push(BASE_64[b64_1 as usize]);
         string.push(BASE_64[b64_2 as usize]);
         string.push(BASE_64[b64_3 as usize]);
@@ -138,6 +133,69 @@ pub fn bytes_to_base64_string(bytes: &[u8]) -> String {
     string
 }
 
+pub fn base64_string_to_bytes(string: &str) -> Vec<u8> {
+
+    let mut bytes_vec: Vec<u8> = Vec::new();
+
+    let no_newlines = string.replace("\r\n", "");
+    let mut b64_iter = no_newlines.chars();
+
+    loop {
+        let b1 = match b64_iter.next() {
+            Some(b) => b,
+            None => break,
+        };
+
+        let b2 = match b64_iter.next() {
+            Some(b) => b,
+            None => break,
+        };
+
+        let b3 = match b64_iter.next() {
+            Some(b) => b,
+            None => break,
+        };
+
+        let b4 = match b64_iter.next() {
+            Some(b) => b,
+            None => break,
+        };
+
+        //between each 4 characters we have 3 bytes of data.
+        let key_1 = match BASE_64.iter().position(|&x| x == b1) {
+            Some(b) => b,
+            None => break,
+        };
+
+        let key_2 = match BASE_64.iter().position(|&x| x == b2) {
+            Some(b) => b,
+            None => break,
+        };
+
+        let key_3 = match BASE_64.iter().position(|&x| x == b3) {
+            Some(b) => b,
+            None => break,
+        };
+
+        let key_4 = match BASE_64.iter().position(|&x| x == b4) {
+            Some(b) => b,
+            None => break,
+        };
+
+        let byte_1 = (key_1 << 2) + (key_2 >> 4);
+        let byte_2 = (key_2 << 4) + (key_3 >> 2);
+        let byte_3 = (key_3 << 6) + (key_4 >> 0);
+
+        //println!("{}\t{}\t{}\t{}", b1, b2, b3, b4);
+        //println!("{}\t{}\t{}", byte_1, byte_2, byte_3);
+
+        bytes_vec.push(byte_1 as u8);
+        bytes_vec.push(byte_2 as u8);
+        bytes_vec.push(byte_3 as u8);
+    }
+
+    bytes_vec
+}
 //Given input from Cryptopals challenge
 #[test]
 fn test_conversion() {

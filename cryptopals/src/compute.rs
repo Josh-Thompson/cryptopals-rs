@@ -11,17 +11,25 @@ pub fn hamming_distance(a: &str, b: &str) -> u32 {
     //zips the two strings into an array of (x,y) tuples of bytes and iterates
     for i in a.as_bytes().iter().zip(b.as_bytes().iter()) {
 
-        dist += hamming_weight((i.0 ^ i.1) as u32);
+        dist += hamming_weight(i.0 ^ i.1) as u32;
     }
 
     dist
 }
 
-//calculates the number of 'set bits' in a given integer. Don't ask me why this bullshit works.
-fn hamming_weight(val: u32) -> u32 {
-    let v1 = val - ((val >> 1) & 0x55555555);
-    let v2 = (v1 & 0x33333333) + ((v1 >> 2) & 0x33333333);
-    (((v2 + (v2 >> 4)) & 0xF0F0F0F).wrapping_mul(0x1010101)) >> 24
+fn hamming_weight(val: u8) -> u8 {
+
+    let mut res = 0;
+
+    for bit_position in 0..8 {
+
+        if (val >> bit_position) & 1u8 == 1u8 {
+
+            res = res + 1;
+        }
+    }
+
+    res
 }
 
 #[test]
