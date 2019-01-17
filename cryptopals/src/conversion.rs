@@ -137,7 +137,7 @@ pub fn base64_string_to_bytes(string: &str) -> Vec<u8> {
 
     let mut bytes_vec: Vec<u8> = Vec::new();
 
-    let no_newlines = string.replace("\r\n", "");
+    let no_newlines = string.replace("\r\n", "").replace("\n", "");
     let mut b64_iter = no_newlines.chars();
 
     loop {

@@ -27,4 +27,10 @@ path = "src/set1/ch5/main.rs"
 name = "ch6"
 path = "src/set1/ch6/main.rs"
 
+[[bin]]
+name = "ch7"
+path = "src/set1/ch7/main.rs"
+
 [dependencies]
+openssl-sys = "0.9"
+openssl = "0.10"

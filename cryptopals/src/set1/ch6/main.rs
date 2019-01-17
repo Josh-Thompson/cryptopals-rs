@@ -63,6 +63,6 @@ fn main() {
         keys.push(str::from_utf8(&key).expect("Bad key!").to_string());
     }
 
-    println!("Output from most likely key:\n\n{:?}", str::from_utf8(&repeat_xor(file_contents.as_bytes(), keys[0].as_bytes())).expect("Bad result!").replace("", ""));
+    println!("Output from most likely key:\n\n{}", str::from_utf8(&repeat_xor(file_contents.as_bytes(), keys[0].as_bytes())).expect("Bad result!").replace("", ""));
 
 }
